@@ -1,0 +1,37 @@
+[
+  {
+    "idAccomplissement": 1,
+    "accomplissementName": "0%",
+    "accomplissementCode": "ZERO",
+    "accomplissementColor": "#6C757D",
+    "validAccomplissement": "1"
+  },
+  {
+    "idAccomplissement": 2,
+    "accomplissementName": "25%",
+    "accomplissementCode": "QUART",
+    "accomplissementColor": "#DC3545",
+    "validAccomplissement": "1"
+  },
+  {
+    "idAccomplissement": 3,
+    "accomplissementName": "50%",
+    "accomplissementCode": "MOITIE",
+    "accomplissementColor": "#FFC107",
+    "validAccomplissement": "1"
+  },
+  {
+    "idAccomplissement": 4,
+    "accomplissementName": "75%",
+    "accomplissementCode": "TROIS_QUARTS",
+    "accomplissementColor": "#17A2B8",
+    "validAccomplissement": "1"
+  },
+  {
+    "idAccomplissement": 5,
+    "accomplissementName": "100%",
+    "accomplissementCode": "TERMINE",
+    "accomplissementColor": "#28A745",
+    "validAccomplissement": "1"
+  }
+]

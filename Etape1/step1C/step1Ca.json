@@ -1,0 +1,65 @@
+[
+  {
+    "idStatus": 1,
+    "statusName": "En cours",
+    "statusCode": "EN_COURS",
+    "statusColor": "#FFC107",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 2,
+    "statusName": "À faire",
+    "statusCode": "A_FAIRE",
+    "statusColor": "#007BFF",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 3,
+    "statusName": "Terminé",
+    "statusCode": "TERMINE",
+    "statusColor": "#28A745",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 4,
+    "statusName": "En attente de validation",
+    "statusCode": "EN_ATTENTE_VALIDATION",
+    "statusColor": "#FD7E14",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 5,
+    "statusName": "À déléguer",
+    "statusCode": "A_DELEGUER",
+    "statusColor": "#17A2B8",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 6,
+    "statusName": "À revoir",
+    "statusCode": "A_REVOIR",
+    "statusColor": "#6F42C1",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 7,
+    "statusName": "À planifier",
+    "statusCode": "A_PLANIFIER",
+    "statusColor": "#20C997",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 8,
+    "statusName": "À augmenter / à diminuer",
+    "statusCode": "A_AJUSTER",
+    "statusColor": "#17A2B8",
+    "validStatus": "1"
+  },
+  {
+    "idStatus": 9,
+    "statusName": "Annulé",
+    "statusCode": "ANNULE",
+    "statusColor": "#DC3545",
+    "validStatus": "1"
+  }
+]

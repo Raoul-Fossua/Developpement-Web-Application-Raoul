@@ -1,0 +1,42 @@
+[
+  {
+    "idCategory": 1,
+    "categoryName": "Recherche",
+    "categoryCode": "RECHERCHE",
+    "categoryColor": "#8B0000",
+    "descriptionCat": "Tâches liées à la recherche scientifique",
+    "validCategory": "1"
+  },
+  {
+    "idCategory": 2,
+    "categoryName": "Gestion de projet",
+    "categoryCode": "GESTION_PROJET",
+    "categoryColor": "#DC3545",
+    "descriptionCat": "Tâches liées à la gestion de projet",
+    "validCategory": "1"
+  },
+  {
+    "idCategory": 3,
+    "categoryName": "Travaux pratiques",
+    "categoryCode": "TRAVAUX_PRATIQUES",
+    "categoryColor": "#28A745",
+    "descriptionCat": "Tâches liées aux travaux pratiques",
+    "validCategory": "1"
+  },
+  {
+    "idCategory": 4,
+    "categoryName": "Rapport de stage",
+    "categoryCode": "RAPPORT_STAGE",
+    "categoryColor": "#FFC107",
+    "descriptionCat": "Tâches liées au rapport de stage",
+    "validCategory": "1"
+  },
+  {
+    "idCategory": 5,
+    "categoryName": "Projet E-Learning",
+    "categoryCode": "PROJET_ELEARNING",
+    "categoryColor": "#17A2B8",
+    "descriptionCat": "Tâches liées au projet E-Learning",
+    "validCategory": "1"
+  }
+]

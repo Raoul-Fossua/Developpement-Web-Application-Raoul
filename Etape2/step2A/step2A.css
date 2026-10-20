@@ -1,0 +1,207 @@
+/* ============================================================
+   RESET & VARIABLES
+   ============================================================ */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+    --border-color: #ccc;
+    --fieldset-bg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   STYLE GLOBAL
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   EN-TÊTE
+   ============================================================ */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ============================================================
+   CONTENU PRINCIPAL
+   ============================================================ */
+main {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ============================================================
+   FORMULAIRE
+   ============================================================ */
+form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+fieldset {
+    background-color: var(--fieldset-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+legend {
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* ============================================================
+   GROUPES DE CHAMPS (Mobile First : 1 colonne)
+   ============================================================ */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* ============================================================
+   BOUTON
+   ============================================================ */
+.form-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* ============================================================
+   PIED DE PAGE
+   ============================================================ */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0.2rem 0;
+}
+
+/* ============================================================
+   RESPONSIVE (Desktop : 2 colonnes pour certains groupes)
+   ============================================================ */
+@media (min-width: 600px) {
+    form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    fieldset {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    legend {
+        grid-column: span 2;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .form-actions {
+        grid-column: span 2;
+    }
+
+    button {
+        width: auto;
+        min-width: 250px;
+    }
+}

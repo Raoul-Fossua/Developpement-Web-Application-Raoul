@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List - Formulaire Dynamique (2B)</title>
+    <!-- Le lien remonte d'un dossier pour trouver le CSS dans step2A -->
+    <link rel="stylesheet" href="../step2A/step2A.css">
+</head>
+<body>
+
+    <!-- EN-TÊTE -->
+    <header>
+        <h1>Ma To-Do List</h1>
+        <p>Ajouter une nouvelle tâche (Dynamique)</p>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main>
+        <section>
+            <form action="#" method="POST">
+                
+                <!-- GROUPE 1 : Informations générales -->
+                <fieldset>
+                    <legend>Informations générales</legend>
+                    <div class="form-group">
+                        <label for="titleTask">Titre de la tâche *</label>
+                        <input type="text" id="titleTask" name="titleTask" placeholder="Ex: Rédaction du mémoire" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionTask">Description courte</label>
+                        <input type="text" id="descriptionTask" name="descriptionTask" placeholder="Ex: Validation de cursus">
+                    </div>
+                    <div class="form-group">
+                        <label for="detailsTask">Détails / Contexte</label>
+                        <textarea id="detailsTask" name="detailsTask" rows="4" placeholder="Décrivez les chapitres ou le contexte..."></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- GROUPE 2 : Planification -->
+                <fieldset>
+                    <legend>Planification</legend>
+                    <div class="form-group">
+                        <label for="creationDateTask">Date de création</label>
+                        <input type="date" id="creationDateTask" name="creationDateTask" value="2026-09-03">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDateTask">Date de début *</label>
+                        <input type="date" id="startDateTask" name="startDateTask" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dueDateTask">Date d'échéance *</label>
+                        <input type="date" id="dueDateTask" name="dueDateTask" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="durationTask">Durée estimée</label>
+                        <input type="text" id="durationTask" name="durationTask" placeholder="Ex: 9 mois">
+                    </div>
+                    <div class="form-group">
+                        <label for="planificationTask">Type de planification</label>
+                        <select id="planificationTask" name="planificationTask">
+                            <option value="">-- Choisir --</option>
+                            <option value="Mensuelle">Mensuelle</option>
+                            <option value="Hebdomadaire">Hebdomadaire</option>
+                            <option value="Quotidienne">Quotidienne</option>
+                            <option value="Ponctuelle">Ponctuelle</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetCompletionTask">Achèvement souhaité</label>
+                        <input type="text" id="targetCompletionTask" name="targetCompletionTask" placeholder="Ex: Dépôt et soutenance">
+                    </div>
+                </fieldset>
+
+                <!-- GROUPE 3 : Catégorisation (Dynamique) -->
+                <fieldset>
+                    <legend>Catégorisation</legend>
+                    <div class="form-group">
+                        <label for="idPriority">Priorité *</label>
+                        <select id="idPriority" name="idPriority" required>
+                            <option value="">-- Choisir une priorité --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="idStatus">Statut *</label>
+                        <select id="idStatus" name="idStatus" required>
+                            <option value="">-- Choisir un statut --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="idAccomplissement">Niveau d'accomplissement</label>
+                        <select id="idAccomplissement" name="idAccomplissement">
+                            <option value="">-- Choisir un niveau --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="idCategory">Catégorie *</label>
+                        <select id="idCategory" name="idCategory" required>
+                            <option value="">-- Choisir une catégorie --</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- BOUTON -->
+                <div class="form-actions">
+                    <button type="submit">Enregistrer la tâche</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- PIED DE PAGE -->
+    <footer>
+        <p>&copy; 2026 - Raoul FOSSUA TINDO</p>
+        <p>Projet To-Do List - Unistra</p>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPT JS : GÉNÉRATION DYNAMIQUE DES LISTES                  -->
+    <!-- ============================================================ -->
+    <script>
+        /* 1. DONNÉES JSON */
+        let prioritiesList = [
+            { "idPriority": 1, "priorityName": "Urgente et importante" },
+            { "idPriority": 2, "priorityName": "Importante" },
+            { "idPriority": 3, "priorityName": "Urgente (non importante)" },
+            { "idPriority": 4, "priorityName": "Moyenne" },
+            { "idPriority": 5, "priorityName": "Peu importante" },
+            { "idPriority": 6, "priorityName": "Délais non-négociables" },
+            { "idPriority": 7, "priorityName": "En attente / Bloquée" }
+        ];
+
+        let statusList = [
+            { "idStatus": 1, "statusName": "En cours" },
+            { "idStatus": 2, "statusName": "À faire" },
+            { "idStatus": 3, "statusName": "Terminé" },
+            { "idStatus": 4, "statusName": "En attente de validation" },
+            { "idStatus": 5, "statusName": "À déléguer" },
+            { "idStatus": 6, "statusName": "À revoir" },
+            { "idStatus": 7, "statusName": "À planifier" },
+            { "idStatus": 8, "statusName": "À augmenter / à diminuer" },
+            { "idStatus": 9, "statusName": "Annulé" }
+        ];
+
+        let accomplissementList = [
+            { "idAccomplissement": 1, "accomplissementName": "0%" },
+            { "idAccomplissement": 2, "accomplissementName": "25%" },
+            { "idAccomplissement": 3, "accomplissementName": "50%" },
+            { "idAccomplissement": 4, "accomplissementName": "75%" },
+            { "idAccomplissement": 5, "accomplissementName": "100%" }
+        ];
+
+        let categoriesList = [
+            { "idCategory": 1, "categoryName": "Recherche" },
+            { "idCategory": 2, "categoryName": "Gestion de projet" },
+            { "idCategory": 3, "categoryName": "Travaux pratiques" },
+            { "idCategory": 4, "categoryName": "Rapport de stage" },
+            { "idCategory": 5, "categoryName": "Projet E-Learning" }
+        ];
+
+        /* 2. INITIALISATION AU CHARGEMENT DE LA PAGE */
+        document.onreadystatechange = function () {
+            if (document.readyState === "complete") {
+                initDynamicSelects();
+            }
+        };
+
+        /* 3. FONCTION DE REMPLISSAGE DES SELECTS */
+        function initDynamicSelects() {
+            
+            // Priorités
+            prioritiesList.forEach(function(item) {
+                let option = `<option value="${item.idPriority}">${item.priorityName}</option>`;
+                document.getElementById('idPriority').insertAdjacentHTML('beforeend', option);
+            });
+
+            // Statuts
+            statusList.forEach(function(item) {
+                let option = `<option value="${item.idStatus}">${item.statusName}</option>`;
+                document.getElementById('idStatus').insertAdjacentHTML('beforeend', option);
+            });
+
+            // Accomplissement
+            accomplissementList.forEach(function(item) {
+                let option = `<option value="${item.idAccomplissement}">${item.accomplissementName}</option>`;
+                document.getElementById('idAccomplissement').insertAdjacentHTML('beforeend', option);
+            });
+
+            // Catégories
+            categoriesList.forEach(function(item) {
+                let option = `<option value="${item.idCategory}">${item.categoryName}</option>`;
+                document.getElementById('idCategory').insertAdjacentHTML('beforeend', option);
+            });
+
+            console.log("Les listes déroulantes ont été générées dynamiquement !");
+        }
+    </script>
+</body>
+</html>

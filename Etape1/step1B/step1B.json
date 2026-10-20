@@ -15,23 +15,23 @@
   },
   {
     "idPriority": 3,
+    "priorityName": "Urgente (non importante)",
+    "priorityLevel": 2,
+    "priorityColor": "#FF5722",
+    "validPriority": "1"
+  },
+  {
+    "idPriority": 4,
     "priorityName": "Moyenne",
     "priorityLevel": 2,
     "priorityColor": "#FFC107",
     "validPriority": "1"
   },
   {
-    "idPriority": 4,
+    "idPriority": 5,
     "priorityName": "Peu importante",
     "priorityLevel": 1,
     "priorityColor": "#28A745",
-    "validPriority": "1"
-  },
-  {
-    "idPriority": 5,
-    "priorityName": "À déléguer",
-    "priorityLevel": 2,
-    "priorityColor": "#17A2B8",
     "validPriority": "1"
   },
   {
