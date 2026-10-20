@@ -4,61 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List - Formulaire Dynamique (2B)</title>
-    <!-- Le lien remonte d'un dossier pour trouver le CSS dans step2A -->
     <link rel="stylesheet" href="../step2A/step2A.css">
 </head>
 <body>
 
-    <!-- EN-TÊTE -->
     <header>
         <h1>Ma To-Do List</h1>
-        <p>Ajouter une nouvelle tâche (Dynamique)</p>
+        <p>Ajouter une nouvelle tâche</p>
+        <nav>
+            <a href="../step3/step3.html" style="color: white; text-decoration: underline;">[ Voir mon Dashboard ]</a>
+        </nav>
     </header>
 
-    <!-- CONTENU PRINCIPAL -->
     <main>
         <section>
-            <form action="#" method="POST">
+            <!-- On ajoute un ID au formulaire pour le JS -->
+            <form id="taskForm">
                 
-                <!-- GROUPE 1 : Informations générales -->
                 <fieldset>
                     <legend>Informations générales</legend>
                     <div class="form-group">
                         <label for="titleTask">Titre de la tâche *</label>
-                        <input type="text" id="titleTask" name="titleTask" placeholder="Ex: Rédaction du mémoire" required>
+                        <input type="text" id="titleTask" required>
                     </div>
                     <div class="form-group">
                         <label for="descriptionTask">Description courte</label>
-                        <input type="text" id="descriptionTask" name="descriptionTask" placeholder="Ex: Validation de cursus">
+                        <input type="text" id="descriptionTask">
                     </div>
                     <div class="form-group">
                         <label for="detailsTask">Détails / Contexte</label>
-                        <textarea id="detailsTask" name="detailsTask" rows="4" placeholder="Décrivez les chapitres ou le contexte..."></textarea>
+                        <textarea id="detailsTask" rows="4"></textarea>
                     </div>
                 </fieldset>
 
-                <!-- GROUPE 2 : Planification -->
                 <fieldset>
                     <legend>Planification</legend>
                     <div class="form-group">
                         <label for="creationDateTask">Date de création</label>
-                        <input type="date" id="creationDateTask" name="creationDateTask" value="2026-09-03">
+                        <input type="date" id="creationDateTask" value="2026-09-03">
                     </div>
                     <div class="form-group">
                         <label for="startDateTask">Date de début *</label>
-                        <input type="date" id="startDateTask" name="startDateTask" required>
+                        <input type="date" id="startDateTask" required>
                     </div>
                     <div class="form-group">
                         <label for="dueDateTask">Date d'échéance *</label>
-                        <input type="date" id="dueDateTask" name="dueDateTask" required>
+                        <input type="date" id="dueDateTask" required>
                     </div>
                     <div class="form-group">
                         <label for="durationTask">Durée estimée</label>
-                        <input type="text" id="durationTask" name="durationTask" placeholder="Ex: 9 mois">
+                        <input type="text" id="durationTask">
                     </div>
                     <div class="form-group">
                         <label for="planificationTask">Type de planification</label>
-                        <select id="planificationTask" name="planificationTask">
+                        <select id="planificationTask">
                             <option value="">-- Choisir --</option>
                             <option value="Mensuelle">Mensuelle</option>
                             <option value="Hebdomadaire">Hebdomadaire</option>
@@ -68,58 +67,52 @@
                     </div>
                     <div class="form-group">
                         <label for="targetCompletionTask">Achèvement souhaité</label>
-                        <input type="text" id="targetCompletionTask" name="targetCompletionTask" placeholder="Ex: Dépôt et soutenance">
+                        <input type="text" id="targetCompletionTask">
                     </div>
                 </fieldset>
 
-                <!-- GROUPE 3 : Catégorisation (Dynamique) -->
                 <fieldset>
                     <legend>Catégorisation</legend>
                     <div class="form-group">
                         <label for="idPriority">Priorité *</label>
-                        <select id="idPriority" name="idPriority" required>
-                            <option value="">-- Choisir une priorité --</option>
+                        <select id="idPriority" required>
+                            <option value="">-- Choisir --</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="idStatus">Statut *</label>
-                        <select id="idStatus" name="idStatus" required>
-                            <option value="">-- Choisir un statut --</option>
+                        <select id="idStatus" required>
+                            <option value="">-- Choisir --</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="idAccomplissement">Niveau d'accomplissement</label>
-                        <select id="idAccomplissement" name="idAccomplissement">
-                            <option value="">-- Choisir un niveau --</option>
+                        <select id="idAccomplissement">
+                            <option value="">-- Choisir --</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="idCategory">Catégorie *</label>
-                        <select id="idCategory" name="idCategory" required>
-                            <option value="">-- Choisir une catégorie --</option>
+                        <select id="idCategory" required>
+                            <option value="">-- Choisir --</option>
                         </select>
                     </div>
                 </fieldset>
 
-                <!-- BOUTON -->
                 <div class="form-actions">
-                    <button type="submit">Enregistrer la tâche</button>
+                    <!-- Bouton qui appelle la fonction JS -->
+                    <button type="button" onclick="saveTask()">Enregistrer la tâche</button>
                 </div>
             </form>
         </section>
     </main>
 
-    <!-- PIED DE PAGE -->
     <footer>
         <p>&copy; 2026 - Raoul FOSSUA TINDO</p>
-        <p>Projet To-Do List - Unistra</p>
     </footer>
 
-    <!-- ============================================================ -->
-    <!-- SCRIPT JS : GÉNÉRATION DYNAMIQUE DES LISTES                  -->
-    <!-- ============================================================ -->
     <script>
-        /* 1. DONNÉES JSON */
+        /* 1. DONNÉES JSON (Pour remplir les listes) */
         let prioritiesList = [
             { "idPriority": 1, "priorityName": "Urgente et importante" },
             { "idPriority": 2, "priorityName": "Importante" },
@@ -129,70 +122,83 @@
             { "idPriority": 6, "priorityName": "Délais non-négociables" },
             { "idPriority": 7, "priorityName": "En attente / Bloquée" }
         ];
-
         let statusList = [
-            { "idStatus": 1, "statusName": "En cours" },
-            { "idStatus": 2, "statusName": "À faire" },
-            { "idStatus": 3, "statusName": "Terminé" },
-            { "idStatus": 4, "statusName": "En attente de validation" },
-            { "idStatus": 5, "statusName": "À déléguer" },
-            { "idStatus": 6, "statusName": "À revoir" },
-            { "idStatus": 7, "statusName": "À planifier" },
-            { "idStatus": 8, "statusName": "À augmenter / à diminuer" },
+            { "idStatus": 1, "statusName": "En cours" }, { "idStatus": 2, "statusName": "À faire" },
+            { "idStatus": 3, "statusName": "Terminé" }, { "idStatus": 4, "statusName": "En attente de validation" },
+            { "idStatus": 5, "statusName": "À déléguer" }, { "idStatus": 6, "statusName": "À revoir" },
+            { "idStatus": 7, "statusName": "À planifier" }, { "idStatus": 8, "statusName": "À augmenter / à diminuer" },
             { "idStatus": 9, "statusName": "Annulé" }
         ];
-
         let accomplissementList = [
-            { "idAccomplissement": 1, "accomplissementName": "0%" },
-            { "idAccomplissement": 2, "accomplissementName": "25%" },
-            { "idAccomplissement": 3, "accomplissementName": "50%" },
-            { "idAccomplissement": 4, "accomplissementName": "75%" },
+            { "idAccomplissement": 1, "accomplissementName": "0%" }, { "idAccomplissement": 2, "accomplissementName": "25%" },
+            { "idAccomplissement": 3, "accomplissementName": "50%" }, { "idAccomplissement": 4, "accomplissementName": "75%" },
             { "idAccomplissement": 5, "accomplissementName": "100%" }
         ];
-
         let categoriesList = [
-            { "idCategory": 1, "categoryName": "Recherche" },
-            { "idCategory": 2, "categoryName": "Gestion de projet" },
-            { "idCategory": 3, "categoryName": "Travaux pratiques" },
-            { "idCategory": 4, "categoryName": "Rapport de stage" },
+            { "idCategory": 1, "categoryName": "Recherche" }, { "idCategory": 2, "categoryName": "Gestion de projet" },
+            { "idCategory": 3, "categoryName": "Travaux pratiques" }, { "idCategory": 4, "categoryName": "Rapport de stage" },
             { "idCategory": 5, "categoryName": "Projet E-Learning" }
         ];
 
-        /* 2. INITIALISATION AU CHARGEMENT DE LA PAGE */
+        /* 2. REMPLISSAGE DYNAMIQUE DES SELECTS */
         document.onreadystatechange = function () {
             if (document.readyState === "complete") {
-                initDynamicSelects();
+                prioritiesList.forEach(item => document.getElementById('idPriority').insertAdjacentHTML('beforeend', `<option value="${item.idPriority}">${item.priorityName}</option>`));
+                statusList.forEach(item => document.getElementById('idStatus').insertAdjacentHTML('beforeend', `<option value="${item.idStatus}">${item.statusName}</option>`));
+                accomplissementList.forEach(item => document.getElementById('idAccomplissement').insertAdjacentHTML('beforeend', `<option value="${item.idAccomplissement}">${item.accomplissementName}</option>`));
+                categoriesList.forEach(item => document.getElementById('idCategory').insertAdjacentHTML('beforeend', `<option value="${item.idCategory}">${item.categoryName}</option>`));
             }
         };
 
-        /* 3. FONCTION DE REMPLISSAGE DES SELECTS */
-        function initDynamicSelects() {
+        /* 3. FONCTION D'ENREGISTREMENT DANS LE LOCALSTORAGE */
+        function saveTask() {
+            // a) Récupérer les valeurs du formulaire
+            let newTask = {
+                idTask: 0, // On va le calculer juste après
+                titleTask: document.getElementById('titleTask').value,
+                descriptionTask: document.getElementById('descriptionTask').value,
+                detailsTask: document.getElementById('detailsTask').value,
+                creationDateTask: document.getElementById('creationDateTask').value,
+                startDateTask: document.getElementById('startDateTask').value,
+                dueDateTask: document.getElementById('dueDateTask').value,
+                durationTask: document.getElementById('durationTask').value,
+                planificationTask: document.getElementById('planificationTask').value,
+                targetCompletionTask: document.getElementById('targetCompletionTask').value,
+                idPriority: parseInt(document.getElementById('idPriority').value),
+                idStatus: parseInt(document.getElementById('idStatus').value),
+                idAccomplissement: parseInt(document.getElementById('idAccomplissement').value) || null,
+                idCategory: parseInt(document.getElementById('idCategory').value),
+                validTask: "1"
+            };
+
+            // b) Vérification basique (le navigateur le fait déjà avec "required", mais on s'assure)
+            if (!newTask.titleTask || !newTask.idPriority || !newTask.idStatus || !newTask.idCategory) {
+                alert("Veuillez remplir tous les champs obligatoires (*).");
+                return;
+            }
+
+            // c) Lire le localStorage pour voir s'il y a déjà des tâches
+            let tasksListString = localStorage.getItem('tasksList');
+            let tasksList = [];
             
-            // Priorités
-            prioritiesList.forEach(function(item) {
-                let option = `<option value="${item.idPriority}">${item.priorityName}</option>`;
-                document.getElementById('idPriority').insertAdjacentHTML('beforeend', option);
-            });
+            if (tasksListString != null) {
+                tasksList = JSON.parse(tasksListString);
+            }
 
-            // Statuts
-            statusList.forEach(function(item) {
-                let option = `<option value="${item.idStatus}">${item.statusName}</option>`;
-                document.getElementById('idStatus').insertAdjacentHTML('beforeend', option);
-            });
+            // d) Générer le nouvel identifiant (clé primaire)
+            // Si le tableau est vide, length = 0, donc idTask = 1
+            newTask.idTask = tasksList.length + 1;
 
-            // Accomplissement
-            accomplissementList.forEach(function(item) {
-                let option = `<option value="${item.idAccomplissement}">${item.accomplissementName}</option>`;
-                document.getElementById('idAccomplissement').insertAdjacentHTML('beforeend', option);
-            });
+            // e) Ajouter la nouvelle tâche au tableau
+            tasksList.push(newTask);
 
-            // Catégories
-            categoriesList.forEach(function(item) {
-                let option = `<option value="${item.idCategory}">${item.categoryName}</option>`;
-                document.getElementById('idCategory').insertAdjacentHTML('beforeend', option);
-            });
+            // f) Sauvegarder le tableau mis à jour dans le localStorage
+            localStorage.setItem('tasksList', JSON.stringify(tasksList));
 
-            console.log("Les listes déroulantes ont été générées dynamiquement !");
+            alert("Tâche enregistrée avec succès !");
+            
+            // g) Rediriger vers le dashboard (Étape 3)
+            window.location.href = "../step3/step3.html";
         }
     </script>
 </body>
