@@ -14,11 +14,14 @@ L'application est entièrement Front-End (HTML, CSS, JavaScript) et utilise l'AP
 
 ## 🌐 Application en ligne (Alwaysdata)
 
-Voici les liens vers les différentes étapes déployées :
+Voici les liens directs vers les différentes étapes de mon projet, hébergées sur mon serveur Alwaysdata :
 
-*   **Étape 1E (Console JSON & PK/FK)** : [https://raoul-fossua.alwaysdata.net/Etape1/step1E/step1E.html](https://raoul-fossua.alwaysdata.net/Etape1/step1E/step1E.html)
-*   **Étape 2A (Formulaire Statique)** : [https://raoul-fossua.alwaysdata.net/Etape2/step2A/step2A.html](https://raoul-fossua.alwaysdata.net/Etape2/step2A/step2A.html)
-*   **Étape 2B (Formulaire Dynamique)** : [https://raoul-fossua.alwaysdata.net/Etape2/step2B/step2B.html](https://raoul-fossua.alwaysdata.net/Etape2/step2B/step2B.html)
+| Étape | Description | Lien direct |
+| :--- | :--- | :--- |
+| **Étape 1E** | Console JSON & Relations PK/FK | [Ouvrir l'Étape 1E](https://raoul-fossua.alwaysdata.net/Etape1/step1E/step1E.html) |
+| **Étape 2A** | Formulaire Statique (HTML/CSS) | [Ouvrir l'Étape 2A](https://raoul-fossua.alwaysdata.net/Etape2/step2A/step2A.html) |
+| **Étape 2B** | Formulaire Dynamique (JS) | [Ouvrir l'Étape 2B](https://raoul-fossua.alwaysdata.net/Etape2/step2B/step2B.html) |
+| **Étape 3** | Dashboard (Tableau récapitulatif) | [Ouvrir le Dashboard](https://raoul-fossua.alwaysdata.net/Etape3/step3.html) |
 
 ---
 
