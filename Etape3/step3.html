@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ma To-Do List</title>
+    <!-- On réutilise le CSS de base -->
+    <link rel="stylesheet" href="../Etape2/step2A/step2A.css">
+    
+    <style>
+        /* Styles spécifiques au tableau du Dashboard */
+        .table-container { width: 100%; overflow-x: auto; margin-top: 1rem; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: var(--primary-color); color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .btn-delete { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .btn-add { display: inline-block; background-color: var(--secondary-color); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mon Dashboard</h1>
+        <p>Gestion de mes tâches</p>
+        <nav>
+            <a href="../Etape2/step2B/step2B.html" style="color: white; text-decoration: underline;">[ + Ajouter une nouvelle tâche ]</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <a href="../Etape2/step2B/step2B.html" class="btn-add">Ajouter une tâche</a>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titre</th>
+                            <th>Priorité</th>
+                            <th>Statut</th>
+                            <th>Catégorie</th>
+                            <th>Échéance</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Le JS va injecter les lignes ici -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Raoul FOSSUA TINDO</p>
+    </footer>
+
+    <script>
+        /* 1. DONNÉES DE RÉFÉRENCE (Pour la relation PK/FK) */
+        let prioritiesList = [
+            { "idPriority": 1, "priorityName": "Urgente et importante" }, { "idPriority": 2, "priorityName": "Importante" },
+            { "idPriority": 3, "priorityName": "Urgente (non importante)" }, { "idPriority": 4, "priorityName": "Moyenne" },
+            { "idPriority": 5, "priorityName": "Peu importante" }, { "idPriority": 6, "priorityName": "Délais non-négociables" },
+            { "idPriority": 7, "priorityName": "En attente / Bloquée" }
+        ];
+        let statusList = [
+            { "idStatus": 1, "statusName": "En cours" }, { "idStatus": 2, "statusName": "À faire" },
+            { "idStatus": 3, "statusName": "Terminé" }, { "idStatus": 4, "statusName": "En attente de validation" },
+            { "idStatus": 5, "statusName": "À déléguer" }, { "idStatus": 6, "statusName": "À revoir" },
+            { "idStatus": 7, "statusName": "À planifier" }, { "idStatus": 8, "statusName": "À augmenter / à diminuer" },
+            { "idStatus": 9, "statusName": "Annulé" }
+        ];
+        let categoriesList = [
+            { "idCategory": 1, "categoryName": "Recherche" }, { "idCategory": 2, "categoryName": "Gestion de projet" },
+            { "idCategory": 3, "categoryName": "Travaux pratiques" }, { "idCategory": 4, "categoryName": "Rapport de stage" },
+            { "idCategory": 5, "categoryName": "Projet E-Learning" }
+        ];
+
+        /* 2. CHARGEMENT DU DASHBOARD */
+        document.onreadystatechange = function () {
+            if (document.readyState === "complete") {
+                displayTasks();
+            }
+        };
+
+        /* 3. FONCTION D'AFFICHAGE (La relation PK/FK est ici !) */
+        function displayTasks() {
+            let tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ""; // On vide le tableau
+
+            let tasksListString = localStorage.getItem('tasksList');
+            
+            if (tasksListString == null) {
+                tableBody.innerHTML = "<tr><td colspan='7' style='text-align:center;'>Aucune tâche enregistrée pour le moment.</td></tr>";
+                return;
+            }
+
+            let tasksList = JSON.parse(tasksListString);
+
+            // Parcours de chaque tâche
+            tasksList.forEach(function(task) {
+                
+                // RELATION PK/FK : On utilise .find() pour récupérer les noms à partir des IDs
+                let priority = prioritiesList.find(p => p.idPriority === task.idPriority);
+                let status = statusList.find(s => s.idStatus === task.idStatus);
+                let category = categoriesList.find(c => c.idCategory === task.idCategory);
+
+                // Si une correspondance n'est pas trouvée, on affiche "?"
+                let priorityName = priority ? priority.priorityName : "?";
+                let statusName = status ? status.statusName : "?";
+                let categoryName = category ? category.categoryName : "?";
+
+                // Création de la ligne HTML
+                let row = `
+                    <tr>
+                        <td>${task.idTask}</td>
+                        <td>${task.titleTask}</td>
+                        <td>${priorityName}</td>
+                        <td>${statusName}</td>
+                        <td>${categoryName}</td>
+                        <td>${task.dueDateTask}</td>
+                        <td><button class="btn-delete" onclick="deleteTask(${task.idTask})">Supprimer</button></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        /* 4. FONCTION SUPPRIMER (Bonus) */
+        function deleteTask(idTaskToDelete) {
+            if(confirm("Voulez-vous vraiment supprimer cette tâche ?")) {
+                let tasksList = JSON.parse(localStorage.getItem('tasksList'));
+                // On garde toutes les tâches SAUF celle qu'on veut supprimer
+                let newTasksList = tasksList.filter(t => t.idTask !== idTaskToDelete);
+                
+                localStorage.setItem('tasksList', JSON.stringify(newTasksList));
+                displayTasks(); // On rafraîchit le tableau
+            }
+        }
+    </script>
+</body>
+</html>

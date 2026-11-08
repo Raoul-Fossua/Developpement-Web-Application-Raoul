@@ -12,13 +12,13 @@
         <h1>Ma To-Do List</h1>
         <p>Ajouter une nouvelle tâche</p>
         <nav>
-            <a href="../step3/step3.html" style="color: white; text-decoration: underline;">[ Voir mon Dashboard ]</a>
+            <!-- Lien pour aller voir le dashboard -->
+            <a href="../../Etape3/step3.html" style="color: white; text-decoration: underline;">[ Voir mon Dashboard ]</a>
         </nav>
     </header>
 
     <main>
         <section>
-            <!-- On ajoute un ID au formulaire pour le JS -->
             <form id="taskForm">
                 
                 <fieldset>
@@ -112,14 +112,11 @@
     </footer>
 
     <script>
-        /* 1. DONNÉES JSON (Pour remplir les listes) */
+        /* 1. DONNÉES DE RÉFÉRENCE */
         let prioritiesList = [
-            { "idPriority": 1, "priorityName": "Urgente et importante" },
-            { "idPriority": 2, "priorityName": "Importante" },
-            { "idPriority": 3, "priorityName": "Urgente (non importante)" },
-            { "idPriority": 4, "priorityName": "Moyenne" },
-            { "idPriority": 5, "priorityName": "Peu importante" },
-            { "idPriority": 6, "priorityName": "Délais non-négociables" },
+            { "idPriority": 1, "priorityName": "Urgente et importante" }, { "idPriority": 2, "priorityName": "Importante" },
+            { "idPriority": 3, "priorityName": "Urgente (non importante)" }, { "idPriority": 4, "priorityName": "Moyenne" },
+            { "idPriority": 5, "priorityName": "Peu importante" }, { "idPriority": 6, "priorityName": "Délais non-négociables" },
             { "idPriority": 7, "priorityName": "En attente / Bloquée" }
         ];
         let statusList = [
@@ -140,7 +137,7 @@
             { "idCategory": 5, "categoryName": "Projet E-Learning" }
         ];
 
-        /* 2. REMPLISSAGE DYNAMIQUE DES SELECTS */
+        /* 2. REMPLISSAGE DYNAMIQUE (Étape 2B) */
         document.onreadystatechange = function () {
             if (document.readyState === "complete") {
                 prioritiesList.forEach(item => document.getElementById('idPriority').insertAdjacentHTML('beforeend', `<option value="${item.idPriority}">${item.priorityName}</option>`));
@@ -150,11 +147,11 @@
             }
         };
 
-        /* 3. FONCTION D'ENREGISTREMENT DANS LE LOCALSTORAGE */
+        /* 3. ENREGISTREMENT DANS LE LOCALSTORAGE (Étape 3) */
         function saveTask() {
-            // a) Récupérer les valeurs du formulaire
+            // Récupération des valeurs
             let newTask = {
-                idTask: 0, // On va le calculer juste après
+                idTask: 0, 
                 titleTask: document.getElementById('titleTask').value,
                 descriptionTask: document.getElementById('descriptionTask').value,
                 detailsTask: document.getElementById('detailsTask').value,
@@ -171,13 +168,13 @@
                 validTask: "1"
             };
 
-            // b) Vérification basique (le navigateur le fait déjà avec "required", mais on s'assure)
+            // Vérification des champs obligatoires
             if (!newTask.titleTask || !newTask.idPriority || !newTask.idStatus || !newTask.idCategory) {
                 alert("Veuillez remplir tous les champs obligatoires (*).");
                 return;
             }
 
-            // c) Lire le localStorage pour voir s'il y a déjà des tâches
+            // Lecture du localStorage
             let tasksListString = localStorage.getItem('tasksList');
             let tasksList = [];
             
@@ -185,20 +182,17 @@
                 tasksList = JSON.parse(tasksListString);
             }
 
-            // d) Générer le nouvel identifiant (clé primaire)
-            // Si le tableau est vide, length = 0, donc idTask = 1
+            // Génération de l'ID (PK)
             newTask.idTask = tasksList.length + 1;
 
-            // e) Ajouter la nouvelle tâche au tableau
+            // Ajout et sauvegarde
             tasksList.push(newTask);
-
-            // f) Sauvegarder le tableau mis à jour dans le localStorage
             localStorage.setItem('tasksList', JSON.stringify(tasksList));
 
             alert("Tâche enregistrée avec succès !");
             
-            // g) Rediriger vers le dashboard (Étape 3)
-            window.location.href = "../step3/step3.html";
+            // Redirection vers le Dashboard (Étape 3)
+            window.location.href = "../../Etape3/step3.html";
         }
     </script>
 </body>
